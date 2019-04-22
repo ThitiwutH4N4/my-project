@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <title>Binary</title>
+
+  </head>
+
+  <body>
+    <h3>Binary search</h3>
+
+    <div id="show">
+      
+    </div>
+
+    <label>Data</label>
+    <ul id="list">
+      
+    </ul>
+
+    <label>enter your number</label>
+    <input type="text" value="" id="input1" name="input1">
+
+    <button onclick="input()">search</button>
+
+    <div id="loop" style="text-align: center;">
+      
+    </div>
+
+    <button id="b1" style="color: red;" onclick="change()">บันทึก</button>
+
+    <div>
+    <input id="i1" type="hidden" name="v1" value="ค่าที่1">
+    <input id="i2" type="text" name="v2" value="ค่าที่2">
+    <button id="b2" onclick="changeV()">change</button>
+    </div>
+
+    <script type="text/javascript">
+          
+      var loop = document.getElementById("loop");
+      var v = "1";
+      for (var i = 0; i < 3; i++) {
+        loop.innerHTML += "<p>"+v+"</p><br>";
+        v+="1";
+      }
+
+      function change(){
+        document.getElementById("b1").style.color = "blue";
+        document.getElementById("b1").innerHTML = "กำลังบันทึก";
+      }
+
+      function changeV(){
+        var in1 = document.getElementById("i1").value;
+        document.getElementById("i2").value = in1;
+      }
+
+      var l = document.getElementById("list");
+      var array = [23,44,76,22,75,97,21,65,77,33,48];
+      for (var i = 0; i <= array.length-1; i++) {
+        document.getElementById("show").innerHTML += "<label>"+array[i]+" </label>";
+      }
+
+      function input(){
+        var input = document.getElementById("input1").value;
+        console.log(input);
+        array.sort();
+      for (var i = 0; i <= array.length-1 ; i++) {
+        array[i];
+        if (i == 0) {
+          var low = array[i];
+          var poL = i;
+        }
+        if (i == array.length-1) {
+          var high = array[i];
+          var poH = i
+        }
+        
+        l.innerHTML += "<li>position "+i+" = "+array[i]+"</li>";
+        console.log('position ' +i+ ' = ' + array[i]);
+      }
+      console.log('-----------------------------------');
+      console.log('position low = ' + poL);
+      console.log('low = ' + low);
+      console.log('position high = ' + poH);
+      console.log('high = ' + high);
+      var poM = (poL + poH) / 2;
+      console.log('position mid = ' + poM);
+      var mid = array[poM];
+      console.log('mid = ' + mid);
+      console.log('-----------------------------------');
+      var taget = input;
+      console.log('taget = ' + taget);
+      console.log('-----------------------------------');
+      
+        var i = 0;
+      if (taget == array[poM]) {
+        document.getElementById("show").innerHTML = "<label>result : "+array[poM]+" = taget : "+taget+"</label>";
+        console.log('result : '+array[poM]+' = taget : '+taget);
+      }else if (taget == array[poL]) {
+          document.getElementById("show").innerHTML = "<label>result : "+array[poL]+" = taget : "+taget+"</label>";
+        console.log('result : '+array[poL]+' = taget : '+taget);
+      }else if (taget == array[poH]){
+          document.getElementById("show").innerHTML = "<label>result : "+array[poH]+" = taget : "+taget+"</label>";
+        console.log('result : '+array[poH]+' = taget : '+taget);
+      }else{
+        while (array[i] != taget) {
+         if (taget < mid) {
+          console.log('position L array[i] = '+array[i]);
+          console.log('position low = '+poL);
+            poL = poL + 1;
+            console.log('position low +1 = '+poL);
+            if (array[poL] == taget) {
+              array[i] = array[poL];
+              document.getElementById("show").innerHTML = "<label>low = taget -> result : "+array[poL]+' = taget : '+taget+"</label>";
+              console.log('low = taget -> result : '+array[poL]+' = taget : '+taget);
+            }
+            else if (array[poH] == taget) {
+              array[i] = array[poH];
+              document.getElementById("show").innerHTML = "<label>high = taget -> result : "+array[i]+' = taget : '+taget+"</label>";
+              console.log('high = taget -> result : '+array[i]+' = taget: '+taget);
+            }else{
+              poH = poM;
+              console.log('position high = '+poH);
+              poM = (poL + poH) / 2;
+              console.log('position mid = '+poM);
+              console.log('array[i] = '+array[poM]);
+              console.log('now : '+array[poM]+' = taget : '+taget);
+              console.log('-----------------------------------');
+              array[i] = array[poM];
+              mid = array[poM];
+            }
+          }
+          if (taget > mid) {
+             console.log('position H array[i] = '+array[i]);
+             console.log('position high = '+poH);
+            poH = poH - 1;
+            console.log('position high -1 = '+poH);
+            if (array[poH] == taget) {
+              array[i] = array[poH];
+              document.getElementById("show").innerHTML = "<label>taget = "+array[poH]+"</label>";
+              console.log('high = taget -> result : '+array[i]+' = taget : '+taget);
+            }else if (array[poL] == taget) {
+              array[i] = array[poL];
+              document.getElementById("show").innerHTML = "<label>taget = "+array[poL]+"</label>";
+              console.log('low = taget -> result : '+array[i]+' = taget: '+taget);
+            }else{
+              poL = poM;
+              console.log('position low = '+poL);
+              poM = (poL + poH) / 2;
+              console.log('position mid = '+poM);
+              console.log('array[i] = '+array[poM]);
+              console.log('now : '+array[poM]+' = taget : '+taget);
+              console.log('-----------------------------------');
+              array[i] = array[poM];
+              mid = array[poM];
+            }
+          }  
+        }if (array[poM] == taget) {
+          document.getElementById("show").innerHTML = "<label>"+array[poM]+"</label>";
+          console.log('result : '+array[poM]+' = taget : '+taget);
+        }
+      }
+      };
+     
+    
+      
+      
+      
+      
+
+    </script>
+  </body>
+</html>
